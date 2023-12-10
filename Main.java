@@ -3,20 +3,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    // List to store user accounts
     private static List<User> users = new ArrayList<>();
-    // Inventory object for managing products
     private static Inventory inventory = new Inventory();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean isRunning = true;
 
-        // Pre-creating an admin account for demonstration
         users.add(new Admin("admin", "12345", inventory));
 
         while (isRunning) {
-            // Main menu
             System.out.println("******** Welcome to The Boba Shop ********");
             System.out.println("1- Login\n2- Register\n3- Exit");
             System.out.print("Enter your choice: ");
@@ -24,13 +20,13 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    handleLogin(scanner); // Call the login function
+                    handleLogin(scanner);
                     break;
                 case 2:
-                    handleRegistration(scanner); // Call the registration function
+                    handleRegistration(scanner);
                     break;
                 case 3:
-                    isRunning = false; // Exit the application
+                    isRunning = false;
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -39,7 +35,6 @@ public class Main {
         scanner.close();
     }
 
-    // Function to handle user login
     private static void handleLogin(Scanner scanner) {
         System.out.print("Enter username: ");
         String username = scanner.next();
@@ -49,9 +44,9 @@ public class Main {
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 if (user instanceof Admin) {
-                    displayAdminMenu(scanner, (Admin) user); // Call admin menu for admin user
+                    displayAdminMenu(scanner, (Admin) user);
                 } else if (user instanceof Customer) {
-                    displayCustomerMenu(scanner, (Customer) user); // Call customer menu for customer user
+                    displayCustomerMenu(scanner, (Customer) user);
                 }
                 return;
             }
@@ -59,7 +54,6 @@ public class Main {
         System.out.println("Invalid username or password");
     }
 
-    // Function to handle user registration
     private static void handleRegistration(Scanner scanner) {
         System.out.print("Enter username: ");
         String username = scanner.next();
@@ -73,11 +67,10 @@ public class Main {
             }
         }
 
-        users.add(new Customer(username, password)); // Create a new customer account
+        users.add(new Customer(username, password));
         System.out.println("Success: customer account has been created");
     }
 
-    // Display admin menu and handle admin-specific operations
     private static void displayAdminMenu(Scanner scanner, Admin admin) {
         boolean isAdminMenuRunning = true;
         while (isAdminMenuRunning) {
@@ -88,25 +81,25 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    createCustomerAccount(scanner); // Call the function to create a customer account
+                    createCustomerAccount(scanner);
                     break;
                 case 2:
-                    removeCustomerAccount(scanner); // Call the function to remove a customer account
+                    removeCustomerAccount(scanner);
                     break;
                 case 3:
-                    admin.viewInventory(); // Display the inventory
+                    admin.viewInventory();
                     break;
                 case 4:
-                    addProduct(scanner); // Call the function to add a product to the inventory
+                    addProduct(scanner, admin);
                     break;
                 case 5:
-                    removeProduct(scanner); // Call the function to remove a product from the inventory
+                    removeProduct(scanner, admin);
                     break;
                 case 6:
-                    restockProduct(scanner); // Call the function to restock a product in the inventory
+                    restockProduct(scanner, admin);
                     break;
                 case 7:
-                    isAdminMenuRunning = false; // Exit admin menu and return to the main menu
+                    isAdminMenuRunning = false;
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -114,7 +107,6 @@ public class Main {
         }
     }
 
-    // Display customer menu and handle customer-specific operations
     private static void displayCustomerMenu(Scanner scanner, Customer customer) {
         boolean isCustomerMenuRunning = true;
         while (isCustomerMenuRunning) {
@@ -125,26 +117,25 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    shopStore(scanner, customer); // Call the function to shop in the store
+                    shopStore(scanner, customer);
                     break;
                 case 2:
-                    viewAndCheckoutCart(scanner, customer); // Call the function to view and checkout the shopping cart
+                    viewAndCheckoutCart(scanner, customer);
                     break;
                 case 3:
-                    System.out.println("Your balance: $" + customer.getBalance()); // Display customer balance
+                    System.out.println("Your balance: $" + customer.getBalance());
                     break;
                 case 4:
-                    addBalance(scanner, customer); // Call the function to add balance to the customer account
+                    addBalance(scanner, customer);
                     break;
                 case 5:
-                    isCustomerMenuRunning = false; // Exit customer menu and return to the main menu
+                    isCustomerMenuRunning = false;
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
         }
     }
-
     // Implement the methods createCustomerAccount, removeCustomerAccount, addProduct, removeProduct, restockProduct, shopStore, viewAndCheckoutCart, addBalance here
     private static void createCustomerAccount(Scanner scanner) {
         System.out.print("Enter new username: ");

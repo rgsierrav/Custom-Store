@@ -45,9 +45,29 @@ public class Admin extends User {
         inventory.listAllProducts();
     }
 
+    // Method to add a product to the inventory
     public void addProduct(String name, double price, int quantity, String teaType, String sweetnessLevel, String milkType, String toppings) {
         Product newProduct = new Product(name, price, quantity, teaType, sweetnessLevel, milkType, toppings);
         inventory.addProduct(newProduct);
     }
 
+    // Method to remove a product from the inventory
+    public void removeProduct(String productName) {
+        boolean success = inventory.removeProduct(productName);
+        if (success) {
+            System.out.println("Success: Product has been removed from inventory");
+        } else {
+            System.out.println("Error: Product does not exist in inventory");
+        }
+    }
+
+    // Method to restock a product in the inventory
+    public void restockProduct(String productName, int newQuantity) {
+        boolean success = inventory.restockProduct(productName, newQuantity);
+        if (success) {
+            System.out.println("Success: Product quantity has been updated");
+        } else {
+            System.out.println("Error: Product does not exist in inventory");
+        }
+    }
 }

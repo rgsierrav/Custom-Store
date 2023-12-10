@@ -14,6 +14,21 @@ public class Customer extends User {
 
     // Customer-specific methods
 
+    // Method for shopping in the store
+    public void shop(Inventory inventory, String productName, int quantity) {
+        Product product = inventory.getProduct(productName);
+        if (product != null && quantity <= product.getQuantity()) {
+            double totalCost = product.getPrice() * quantity;
+            if (this.balance >= totalCost) {
+                addToCart(product, quantity);
+            } else {
+                System.out.println("Insufficient balance to add this product to the cart.");
+            }
+        } else {
+            System.out.println("Product not found or insufficient quantity in inventory.");
+        }
+    }
+
     // Method to add an item to the shopping cart
     public void addToCart(Product product, int quantity) {
         shoppingCart.addItem(product, quantity);
@@ -64,8 +79,7 @@ public class Customer extends User {
         shoppingCart.displayCartContents();
     }
     
-    public void playBalanceGame() {
-        Scanner scanner = new Scanner(System.in);
+    public void playBalanceGame(Scanner scanner) {
         Random random = new Random();
         int winningNumber = random.nextInt(10) + 1; // Random number between 1 and 10
         int numberOfTries = 3; // Number of attempts the customer gets

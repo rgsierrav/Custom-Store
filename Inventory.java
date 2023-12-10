@@ -2,7 +2,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.io.Serializable;
 
-
 public class Inventory implements Serializable {
     private Map<String, Product> products;
 
@@ -67,9 +66,35 @@ public class Inventory implements Serializable {
         return false; // Product not found
     }
 
+    // Method to update a product's details
+    public void updateProductDetails(String productName, double newPrice, String teaType, String sweetnessLevel, String milkType, String toppings) {
+        if (products.containsKey(productName)) {
+            Product product = products.get(productName);
+            product.setPrice(newPrice);
+            product.setTeaType(teaType);
+            product.setSweetnessLevel(sweetnessLevel);
+            product.setMilkType(milkType);
+            product.setToppings(toppings);
+            System.out.println("Success: Product details have been updated");
+        } else {
+            System.out.println("Error: Product does not exist in inventory");
+        }
+    }
+
+    // Method to search for a product in the inventory
+    public void searchProduct(String productName) {
+        if (products.containsKey(productName)) {
+            Product product = products.get(productName);
+            product.displayInfo();
+        } else {
+            System.out.println("Product not found in inventory");
+        }
+    }
+
+    // Method to generate an inventory report
     public void generateInventoryReport() {
         int totalProducts = products.size();
         double totalValue = products.values().stream().mapToDouble(p -> p.getPrice() * p.getQuantity()).sum();
         System.out.println("Total Products: " + totalProducts + ", Total Value: $" + totalValue);
-    }    
+    }
 }

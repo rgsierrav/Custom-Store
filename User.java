@@ -14,7 +14,6 @@ public class User {
     }
 
     public void setUsername(String username) {
-        // Setter for username
         this.username = username;
     }
 
@@ -23,11 +22,10 @@ public class User {
     }
 
     public void setPassword(String password) {
-        // Setter for password
         this.password = password;
     }
 
-    // You might want to override toString() method for debugging purposes
+    // Override toString() method for debugging purposes
     @Override
     public String toString() {
         return "User{" +
@@ -35,8 +33,4 @@ public class User {
                ", password='" + password + '\'' +
                '}';
     }
-
-    // Additional methods like validatePassword can be added if needed
-    // Additional methods, such as validatePassword, can be added here if required.
-    // ...
 }

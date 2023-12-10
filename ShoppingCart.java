@@ -66,9 +66,4 @@ public class ShoppingCart {
             }
         }
     }
-
-    // Additional methods related to shopping cart management can be added here
-
-    // Getters and Setters if needed
-    // ...
 }
