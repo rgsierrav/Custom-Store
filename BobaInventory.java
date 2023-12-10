@@ -43,6 +43,10 @@ public class BobaInventory {
         System.out.println("Error: Product not found in inventory");
     }
 
+    public List<BobaProduct> getProducts() {
+    return products;
+    }
+
     // Method to view all products in the inventory
     public void viewInventory() {
         if (products.isEmpty()) {
