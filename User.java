@@ -14,6 +14,7 @@ public class User {
     }
 
     public void setUsername(String username) {
+        // Setter for username
         this.username = username;
     }
 
@@ -22,6 +23,7 @@ public class User {
     }
 
     public void setPassword(String password) {
+        // Setter for password
         this.password = password;
     }
 
@@ -35,5 +37,6 @@ public class User {
     }
 
     // Additional methods like validatePassword can be added if needed
+    // Additional methods, such as validatePassword, can be added here if required.
     // ...
 }

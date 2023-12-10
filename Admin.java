@@ -2,7 +2,7 @@ import java.util.List;
 
 public class Admin extends User {
 
-    private Inventory inventory; // Assuming you have an Inventory class
+    private Inventory inventory;
 
     // Constructor
     public Admin(String username, String password, Inventory inventory) {
@@ -21,17 +21,18 @@ public class Admin extends User {
                 return;
             }
         }
-        // Create new customer account
+        // Create a new customer account
         customers.add(new Customer(username, password));
-        System.out.println("Success: customer account has been created");
+        System.out.println("Success: Customer account has been created");
     }
 
     // Method to remove a customer account
     public void removeCustomerAccount(List<Customer> customers, String username) {
+        // Iterate through customers to find and remove the account
         for (Customer customer : customers) {
             if (customer.getUsername().equals(username)) {
                 customers.remove(customer);
-                System.out.println("Success: customer account has been removed");
+                System.out.println("Success: Customer account has been removed");
                 return;
             }
         }
@@ -40,14 +41,12 @@ public class Admin extends User {
 
     // Method to view inventory
     public void viewInventory() {
-        // Assuming Inventory class has a method to list all products
+        // Assuming Inventory class has a method to list all products, display it
         inventory.listAllProducts();
     }
 
-    // Methods to add, remove, and restock products can be added similarly
-    // ...
+    // Additional methods for adding, removing, and restocking products can be added similarly
 
     // Getters and Setters for inventory if needed
     // ...
-
 }

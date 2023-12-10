@@ -4,7 +4,7 @@ import java.util.Map;
 public class Inventory {
     private Map<String, Product> products;
 
-    // Constructor
+    // Constructor initializes an empty inventory
     public Inventory() {
         this.products = new HashMap<>();
     }
@@ -12,21 +12,21 @@ public class Inventory {
     // Method to add a product to the inventory
     public void addProduct(Product product) {
         if (products.containsKey(product.getName())) {
-            System.out.println("Error: product already exists in inventory");
+            System.out.println("Error: Product with the same name already exists in inventory");
         } else {
             products.put(product.getName(), product);
             System.out.println("Success: Product has been added to inventory");
         }
     }
 
-    // Method to update a product's quantity
+    // Method to update a product's quantity in the inventory
     public void updateProductQuantity(String productName, int newQuantity) {
         if (products.containsKey(productName)) {
             Product product = products.get(productName);
             product.setQuantity(newQuantity);
             System.out.println("Success: Product quantity has been updated");
         } else {
-            System.out.println("Error: product does not exist in inventory");
+            System.out.println("Error: Product does not exist in inventory");
         }
     }
 
@@ -43,10 +43,7 @@ public class Inventory {
 
     // Method to get a product by name from the inventory
     public Product getProduct(String name) {
-        if (products.containsKey(name)) {
-            return products.get(name);
-        }
-        return null; // Product not found
+        return products.get(name); // Returns null if product is not found, else returns the product
     }
 
     // Method to remove a product by name from the inventory
@@ -66,5 +63,5 @@ public class Inventory {
             return true; // Product restocked successfully
         }
         return false; // Product not found
-    }    
+    }
 }

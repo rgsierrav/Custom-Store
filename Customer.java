@@ -2,7 +2,7 @@ public class Customer extends User {
     private ShoppingCart shoppingCart;
     private double balance;
 
-    // Constructor
+    // Constructor initializes a customer with a username, password, an empty shopping cart, and a default balance of 0.0
     public Customer(String username, String password) {
         super(username, password);
         this.shoppingCart = new ShoppingCart();
@@ -53,5 +53,4 @@ public class Customer extends User {
 
     // Additional methods for customer functionalities can be added
     // ...
-
 }
