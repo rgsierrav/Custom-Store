@@ -82,22 +82,22 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    // Implement create customer account
+                    createCustomerAccount(scanner);
                     break;
                 case 2:
-                    // Implement remove customer account
+                    removeCustomerAccount(scanner);
                     break;
                 case 3:
                     admin.viewInventory();
                     break;
                 case 4:
-                    // Implement add product
+                    addProduct(scanner);
                     break;
                 case 5:
-                    // Implement remove product
+                    removeProduct(scanner);
                     break;
                 case 6:
-                    // Implement restock product
+                    restockProduct(scanner);
                     break;
                 case 7:
                     isAdminMenuRunning = false;
@@ -118,16 +118,16 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    // Implement shop the store
+                    shopStore(scanner, customer);
                     break;
                 case 2:
-                    // Implement view and checkout shopping cart
+                    viewAndCheckoutCart(scanner, customer);
                     break;
                 case 3:
                     System.out.println("Your balance: $" + customer.getBalance());
                     break;
                 case 4:
-                    // Implement add balance
+                    addBalance(scanner, customer);
                     break;
                 case 5:
                     isCustomerMenuRunning = false;
@@ -137,4 +137,112 @@ public class Main {
             }
         }
     }
+
+    // Implement the methods createCustomerAccount, removeCustomerAccount, addProduct, removeProduct, restockProduct, shopStore, viewAndCheckoutCart, addBalance here
+    private static void createCustomerAccount(Scanner scanner) {
+        System.out.print("Enter new username: ");
+        String username = scanner.next();
+        System.out.print("Enter new password: ");
+        String password = scanner.next();
+    
+        // Check if username already exists
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                System.out.println("Error: This username already exists");
+                return;
+            }
+        }
+    
+        // Create new customer account
+        users.add(new Customer(username, password));
+        System.out.println("Success: customer account has been created");
+    }
+
+    private static void removeCustomerAccount(Scanner scanner) {
+        System.out.print("Enter username to remove: ");
+        String username = scanner.next();
+    
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername().equals(username) && users.get(i) instanceof Customer) {
+                users.remove(i);
+                System.out.println("Success: customer account has been removed");
+                return;
+            }
+        }
+        System.out.println("Error: This username doesn't exist");
+    }
+    
+    private static void addProduct(Scanner scanner) {
+        System.out.print("Enter new product name: ");
+        String name = scanner.next();
+        System.out.print("Enter count: ");
+        int count = scanner.nextInt();
+        System.out.print("Enter price: ");
+        double price = scanner.nextDouble();
+    
+        Product newProduct = new Product(name, price, count);
+        inventory.addProduct(newProduct);
+    }
+    
+    private static void removeProduct(Scanner scanner) {
+        System.out.print("Enter product name to remove: ");
+        String name = scanner.next();
+    
+        if (inventory.removeProduct(name)) {
+            System.out.println("Product removed successfully.");
+        } else {
+            System.out.println("Error: Product not found.");
+        }
+    }
+    
+    private static void restockProduct(Scanner scanner) {
+        System.out.print("Enter product name to restock: ");
+        String name = scanner.next();
+        System.out.print("Enter new quantity: ");
+        int quantity = scanner.nextInt();
+    
+        if (inventory.restockProduct(name, quantity)) {
+            System.out.println("Product restocked successfully.");
+        } else {
+            System.out.println("Error: Product not found.");
+        }
+    }
+    
+    private static void shopStore(Scanner scanner, Customer customer) {
+        inventory.listAllProducts();
+        System.out.print("Enter the product name you want to add to your cart: ");
+        String productName = scanner.next();
+        System.out.print("Enter quantity: ");
+        int quantity = scanner.nextInt();
+    
+        Product selectedProduct = inventory.getProduct(productName);
+        if (selectedProduct != null) {
+            customer.getShoppingCart().addItem(selectedProduct, quantity);
+            System.out.println("Product added to your shopping cart.");
+        } else {
+            System.out.println("Product not found.");
+        }
+    }
+    
+    private static void viewAndCheckoutCart(Scanner scanner, Customer customer) {
+        ShoppingCart cart = customer.getShoppingCart();
+        cart.displayCartContents();
+        System.out.print("Checkout (Y/N)? ");
+        String choice = scanner.next();
+    
+        if (choice.equalsIgnoreCase("Y")) {
+            if (customer.checkout()) {
+                System.out.println("Checkout successful. Your new balance: $" + customer.getBalance());
+            } else {
+                System.out.println("Checkout failed. Insufficient balance.");
+            }
+        }
+    }
+    
+    private static void addBalance(Scanner scanner, Customer customer) {
+        System.out.print("Enter amount to add to your balance: ");
+        double amount = scanner.nextDouble();
+        customer.addBalance(amount);
+        System.out.println("Balance updated. Your new balance: $" + customer.getBalance());
+    }    
 }
