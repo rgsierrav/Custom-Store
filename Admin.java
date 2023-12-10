@@ -19,7 +19,7 @@ public class Admin extends User {
     
         try (Scanner scanner = new Scanner(System.in)) {
             do {
-                System.out.println("******** Admin Menu ********");
+                System.out.println("* Admin Menu *");
                 System.out.println("1- Create a customer account");
                 System.out.println("2- Remove a customer account");
                 System.out.println("3- View inventory");
