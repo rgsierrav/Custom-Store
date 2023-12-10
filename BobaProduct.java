@@ -5,11 +5,12 @@ public class BobaProduct {
     private int count;  // New field to track the product count
 
     // Constructor
-    public BobaProduct(String name, String size, double price) {
+    public BobaProduct(String name, String size, int count, double price) {
         this.name = name;
         this.size = size;
+        this.count = count;
         this.price = price;
-    }
+    }    
 
     // Getter and Setter for Count
     public int getCount() {

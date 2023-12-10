@@ -13,6 +13,9 @@ public class BobaShop {
         this.users = new ArrayList<>();
         // Default admin account for demonstration purposes
         this.users.add(new Admin("admin", "12345", inventory, users));
+        // Add default customer
+        Customer defaultCustomer = new Customer("BobaFan", "BobaFan1", this.inventory);
+        this.users.add(defaultCustomer);
     }
 
     public void displayCurrentUserDetails() {

@@ -2,8 +2,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        try(Scanner scanner = new Scanner(System.in)){
-            BobaShop bobaShop = new BobaShop(); 
+        try (Scanner scanner = new Scanner(System.in)) {
+            BobaInventory inventory = new BobaInventory(); // Inventory is initialized with default items
+            BobaShop bobaShop = new BobaShop(); // Shop is initialized with default customer and inventory
+
             bobaShop.loadData();  // Load data at the start
 
             int choice;
@@ -36,11 +38,10 @@ public class Main {
     }
 
     private static void displayWelcomeMessage() {
-        System.out.println("*      Welcome to Our Cozy Boba Tea Shop!      *");
-        System.out.println("*                                              *");
-        System.out.println("* 1 - Login                                    *");
-        System.out.println("* 2 - Register                                 *");
-        System.out.println("* 3 - Exit                                     *");
+        System.out.println("* Welcome to Our Cozy Boba Tea Shop! *");
+        System.out.println("* 1 - Login *");
+        System.out.println("* 2 - Register *");
+        System.out.println("* 3 - Exit *");
         System.out.print("Enter your choice: ");
     }
 }
