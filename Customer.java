@@ -24,14 +24,14 @@ public class Customer extends User {
     }
 
     // Method to checkout
-    public void checkout() {
+    public boolean checkout() {
         double totalCost = shoppingCart.calculateTotal();
         if (balance >= totalCost) {
             balance -= totalCost;
             shoppingCart.clear();
-            System.out.println("Thank you for shopping. Your new balance: $" + balance);
+            return true; // Checkout successful
         } else {
-            System.out.println("Insufficient balance to complete the purchase.");
+            return false; // Insufficient balance to complete the purchase.
         }
     }
 

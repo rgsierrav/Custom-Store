@@ -19,16 +19,6 @@ public class Inventory {
         }
     }
 
-    // Method to remove a product from the inventory
-    public void removeProduct(String productName) {
-        if (products.containsKey(productName)) {
-            products.remove(productName);
-            System.out.println("Success: Product has been removed from inventory");
-        } else {
-            System.out.println("Error: product does not exist in inventory");
-        }
-    }
-
     // Method to update a product's quantity
     public void updateProductQuantity(String productName, int newQuantity) {
         if (products.containsKey(productName)) {
@@ -51,9 +41,30 @@ public class Inventory {
         }
     }
 
-    // Additional methods related to inventory management can be added
-    // ...
+    // Method to get a product by name from the inventory
+    public Product getProduct(String name) {
+        if (products.containsKey(name)) {
+            return products.get(name);
+        }
+        return null; // Product not found
+    }
 
-    // Getters and Setters if needed
-    // ...
+    // Method to remove a product by name from the inventory
+    public boolean removeProduct(String productName) {
+        if (products.containsKey(productName)) {
+            products.remove(productName);
+            return true; // Product removed successfully
+        }
+        return false; // Product not found
+    }
+
+    // Method to restock a product's quantity by name
+    public boolean restockProduct(String productName, int newQuantity) {
+        if (products.containsKey(productName)) {
+            Product product = products.get(productName);
+            product.setQuantity(newQuantity);
+            return true; // Product restocked successfully
+        }
+        return false; // Product not found
+    }    
 }

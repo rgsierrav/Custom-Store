@@ -181,19 +181,29 @@ public class Main {
         double price = scanner.nextDouble();
     
         Product newProduct = new Product(name, price, count);
+    
+        // Check if the product already exists in the inventory
+        if (inventory.getProduct(name) != null) {
+            System.out.println("Error: Product already exists.");
+            return;
+        }
+    
+        // Add the new product to the inventory
         inventory.addProduct(newProduct);
-    }
+        System.out.println("Success: Product has been added to inventory");
+    }    
     
     private static void removeProduct(Scanner scanner) {
         System.out.print("Enter product name to remove: ");
         String name = scanner.next();
     
+        // Remove the product from the inventory
         if (inventory.removeProduct(name)) {
-            System.out.println("Product removed successfully.");
+            System.out.println("Success: Product has been removed from inventory");
         } else {
-            System.out.println("Error: Product not found.");
+            System.out.println("Error: Product does not exist in inventory");
         }
-    }
+    }    
     
     private static void restockProduct(Scanner scanner) {
         System.out.print("Enter product name to restock: ");
@@ -209,20 +219,35 @@ public class Main {
     }
     
     private static void shopStore(Scanner scanner, Customer customer) {
+        // Display available products in the inventory
         inventory.listAllProducts();
+        
         System.out.print("Enter the product name you want to add to your cart: ");
         String productName = scanner.next();
-        System.out.print("Enter quantity: ");
-        int quantity = scanner.nextInt();
-    
+        
+        // Check if the selected product exists in the inventory
         Product selectedProduct = inventory.getProduct(productName);
         if (selectedProduct != null) {
-            customer.getShoppingCart().addItem(selectedProduct, quantity);
-            System.out.println("Product added to your shopping cart.");
+            System.out.print("Enter quantity: ");
+            int quantity = scanner.nextInt();
+    
+            if (quantity <= 0) {
+                System.out.println("Error: Quantity must be greater than zero.");
+                return;
+            }
+    
+            // Check if there are enough items in the inventory
+            if (quantity > selectedProduct.getQuantity()) {
+                System.out.println("Error: Not enough items in stock.");
+            } else {
+                // Add the product to the customer's shopping cart
+                customer.getShoppingCart().addItem(selectedProduct, quantity);
+                System.out.println("Product added to your shopping cart.");
+            }
         } else {
-            System.out.println("Product not found.");
+            System.out.println("Error: Product not found in the inventory.");
         }
-    }
+    }    
     
     private static void viewAndCheckoutCart(Scanner scanner, Customer customer) {
         ShoppingCart cart = customer.getShoppingCart();
