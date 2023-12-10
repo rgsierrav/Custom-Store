@@ -1,3 +1,5 @@
 public class Admin extends User {
-    // Admin-specific attributes and methods...
+    public Admin(String username, String password) {
+        super(username, password);
+    }
 }
