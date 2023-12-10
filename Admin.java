@@ -122,19 +122,14 @@ public class Admin extends User {
             System.out.print("Enter size: ");
             String size = scanner.nextLine();
             System.out.print("Enter price: ");
-            
-            // Ensuring the input is a valid double
-            while (!scanner.hasNextDouble()) {
-                System.out.println("Please enter a valid number for price.");
-                scanner.next(); // Clear the invalid input
-                System.out.print("Enter price: ");
-            }
             double price = scanner.nextDouble();
-        
-            BobaProduct newProduct = new BobaProduct(name, size, price);
+            System.out.print("Enter count: ");
+            int count = scanner.nextInt();
+    
+            BobaProduct newProduct = new BobaProduct(name, size, count, price);
             inventory.addProduct(newProduct);
         }
-    }  
+    }      
 
     private void removeProduct() {
         try (Scanner scanner = new Scanner(System.in)) {
