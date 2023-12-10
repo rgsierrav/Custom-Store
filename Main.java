@@ -4,9 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BobaShop bobaShop = new BobaShop(); 
-
-        // Load data (assuming serialization is implemented)
-        // bobaShop.loadData();
+        bobaShop.loadData();  // Load data at the start
 
         int choice;
 
@@ -29,7 +27,10 @@ public class Main {
                     System.out.println("Invalid choice. Please try again.");
             }
 
-            if (choice == 3) break; // Exit the loop if choice is to exit
+            if (choice == 3) {
+                bobaShop.saveData();  // Save data before exiting
+                break;
+            }
         }
     }
 

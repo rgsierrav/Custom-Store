@@ -15,10 +15,25 @@ public class BobaShop {
         this.users.add(new Admin("admin", "12345", inventory, users));
     }
 
+    public void saveData() {
+        FileManager.serialize(users, "users.ser");
+        FileManager.serialize(inventory, "inventory.ser");
+    }    
+
     // Load data method (to be implemented for serialization/deserialization)
     public void loadData() {
-        // Load users and inventory data
-    }
+        // Deserialize users
+        Object usersData = FileManager.deserialize("users.ser");
+        if (usersData != null) {
+            users = (List<User>) usersData;
+        }
+    
+        // Deserialize inventory
+        Object inventoryData = FileManager.deserialize("inventory.ser");
+        if (inventoryData != null) {
+            inventory = (BobaInventory) inventoryData;
+        }
+    }    
 
     // Method for user login
     public void login() {
