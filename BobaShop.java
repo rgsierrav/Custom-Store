@@ -15,6 +15,15 @@ public class BobaShop {
         this.users.add(new Admin("admin", "12345", inventory, users));
     }
 
+    public void displayCurrentUserDetails() {
+        if (currentUser != null) {
+            System.out.println("Logged in as: " + currentUser.getUsername());
+            // Add more details or functionalities specific to the currentUser
+        } else {
+            System.out.println("No user is currently logged in.");
+        }
+    }    
+
     public void saveData() {
         FileManager.serialize(users, "users.ser");
         FileManager.serialize(inventory, "inventory.ser");
@@ -25,15 +34,20 @@ public class BobaShop {
         // Deserialize users
         Object usersData = FileManager.deserialize("users.ser");
         if (usersData instanceof List<?>) {
-            users = (List<User>) usersData;
+            List<?> rawList = (List<?>) usersData;
+            for (Object o : rawList) {
+                if (o instanceof User) {
+                    users.add((User) o);
+                }
+            }
         }
     
         // Deserialize inventory
         Object inventoryData = FileManager.deserialize("inventory.ser");
-        if (inventoryData != null) {
+        if (inventoryData instanceof BobaInventory) {
             inventory = (BobaInventory) inventoryData;
         }
-    }    
+    }      
 
     // Method for user login
     public void login() {
