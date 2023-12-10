@@ -115,26 +115,34 @@ public class Customer extends User {
     }    
 
     private void addBalance() {
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(System.in);
             int secretNumber = (int) (Math.random() * 10) + 1; // Secret number between 1 and 10
             System.out.println("Guess a number between 1 and 10 to add $100 to your balance!");
-
+    
             System.out.print("Enter your guess: ");
             int guess = scanner.nextInt();
-
+    
             if (guess == secretNumber) {
                 balance += 100; // Add $100 to balance if guessed correctly
                 System.out.println("Congratulations! You guessed correctly. $100 has been added to your balance.");
             } else {
                 System.out.println("Sorry, that's not correct. The correct number was " + secretNumber + ".");
             }
-
+    
             System.out.println("Your new balance is: $" + balance);
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter a number.");
-            scanner.nextLine(); // Clear the buffer
+            if (scanner != null) {
+                scanner.nextLine(); // Clear the buffer
+            }
+        } finally {
+            if (scanner != null) {
+                scanner.close(); // Close the scanner
+            }
         }
-    }
+    }    
 
     // Getters and setters for balance and shopping cart
     public double getBalance() {
