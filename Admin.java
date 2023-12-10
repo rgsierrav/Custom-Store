@@ -1,0 +1,3 @@
+public class Admin extends User {
+    // Admin-specific attributes and methods...
+}
