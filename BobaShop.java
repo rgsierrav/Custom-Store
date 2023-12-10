@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -42,21 +43,28 @@ public class BobaShop {
 
     // Load data method (to be implemented for serialization/deserialization)
     public void loadData() {
-        // Deserialize users
-        Object usersData = FileManager.deserialize("users.ser");
-        if (usersData instanceof List<?>) {
-            List<?> rawList = (List<?>) usersData;
-            for (Object o : rawList) {
-                if (o instanceof User) {
-                    users.add((User) o);
+        File usersFile = new File("users.ser");
+        File inventoryFile = new File("inventory.ser");
+
+        if (usersFile.exists()) {
+            // Deserialize users
+            Object usersData = FileManager.deserialize("users.ser");
+            if (usersData instanceof List<?>) {
+                List<?> rawList = (List<?>) usersData;
+                for (Object o : rawList) {
+                    if (o instanceof User) {
+                        users.add((User) o);
+                    }
                 }
             }
         }
-    
-        // Deserialize inventory
-        Object inventoryData = FileManager.deserialize("inventory.ser");
-        if (inventoryData instanceof BobaInventory) {
-            inventory = (BobaInventory) inventoryData;
+
+        if (inventoryFile.exists()) {
+            // Deserialize inventory
+            Object inventoryData = FileManager.deserialize("inventory.ser");
+            if (inventoryData instanceof BobaInventory) {
+                inventory = (BobaInventory) inventoryData;
+            }
         }
     }      
 
