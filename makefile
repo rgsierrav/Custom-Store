@@ -29,8 +29,9 @@ run: all
 	java $(MAIN)
 
 # Target to clean the directory
-clean:
-	rm -f *.class
+# clean:
+# 	rm -f *.class
 
-# Phony targets
-.PHONY: all run clean
+clean:
+	del *.class
+      
