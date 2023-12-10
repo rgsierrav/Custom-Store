@@ -2,22 +2,61 @@ public class Product {
     private String name;
     private double price;
     private int quantity;
+    private String teaType; // New attribute for tea type
+    private String sweetnessLevel; // New attribute for sweetness level
+    private String milkType; // New attribute for milk type
+    private String toppings; // New attribute for toppings
 
     // Constructor to initialize product properties
-    public Product(String name, double price, int quantity) {
+    public Product(String name, double price, int quantity, String teaType, String sweetnessLevel, String milkType, String toppings) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.teaType = teaType;
+        this.sweetnessLevel = sweetnessLevel;
+        this.milkType = milkType;
+        this.toppings = toppings;
     }
 
-    // Getters and Setters for product properties
+    // Getters and setters for new attributes
+    public String getTeaType() {
+        return teaType;
+    }
 
+    public void setTeaType(String teaType) {
+        this.teaType = teaType;
+    }
+
+    public String getSweetnessLevel() {
+        return sweetnessLevel;
+    }
+
+    public void setSweetnessLevel(String sweetnessLevel) {
+        this.sweetnessLevel = sweetnessLevel;
+    }
+
+    public String getMilkType() {
+        return milkType;
+    }
+
+    public void setMilkType(String milkType) {
+        this.milkType = milkType;
+    }
+
+    public String getToppings() {
+        return toppings;
+    }
+
+    public void setToppings(String toppings) {
+        this.toppings = toppings;
+    }
+
+    // Existing getters and setters
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        // Setter for the product name
         this.name = name;
     }
 
@@ -26,7 +65,6 @@ public class Product {
     }
 
     public void setPrice(double price) {
-        // Setter for the product price
         this.price = price;
     }
 
@@ -35,26 +73,27 @@ public class Product {
     }
 
     public void setQuantity(int quantity) {
-        // Setter for the product quantity
         this.quantity = quantity;
     }
 
     // Method to display product information
     public void displayInfo() {
-        // Display product information including name, price, and quantity
-        System.out.println("Name: " + name + ", Price: $" + price + ", Quantity: " + quantity);
+        System.out.println("Name: " + name + ", Price: $" + price + ", Quantity: " + quantity +
+                           ", Tea Type: " + teaType + ", Sweetness: " + sweetnessLevel +
+                           ", Milk Type: " + milkType + ", Toppings: " + toppings);
     }
-
-    // Additional methods related to the product can be added here
 
     // Override toString method for easy printing
     @Override
     public String toString() {
-        // Convert the product object to a string representation
         return "Product{" +
                "name='" + name + '\'' +
                ", price=" + price +
                ", quantity=" + quantity +
+               ", teaType='" + teaType + '\'' +
+               ", sweetnessLevel='" + sweetnessLevel + '\'' +
+               ", milkType='" + milkType + '\'' +
+               ", toppings='" + toppings + '\'' +
                '}';
     }
 }

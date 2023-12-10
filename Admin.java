@@ -45,8 +45,9 @@ public class Admin extends User {
         inventory.listAllProducts();
     }
 
-    // Additional methods for adding, removing, and restocking products can be added similarly
+    public void addProduct(String name, double price, int quantity, String teaType, String sweetnessLevel, String milkType, String toppings) {
+        Product newProduct = new Product(name, price, quantity, teaType, sweetnessLevel, milkType, toppings);
+        inventory.addProduct(newProduct);
+    }
 
-    // Getters and Setters for inventory if needed
-    // ...
 }

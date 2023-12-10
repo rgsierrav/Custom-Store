@@ -1,7 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.io.Serializable;
 
-public class Inventory {
+
+public class Inventory implements Serializable {
     private Map<String, Product> products;
 
     // Constructor initializes an empty inventory
@@ -64,4 +66,10 @@ public class Inventory {
         }
         return false; // Product not found
     }
+
+    public void generateInventoryReport() {
+        int totalProducts = products.size();
+        double totalValue = products.values().stream().mapToDouble(p -> p.getPrice() * p.getQuantity()).sum();
+        System.out.println("Total Products: " + totalProducts + ", Total Value: $" + totalValue);
+    }    
 }

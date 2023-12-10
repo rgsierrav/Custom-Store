@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.util.Random;
+
 public class Customer extends User {
     private ShoppingCart shoppingCart;
     private double balance;
@@ -28,12 +31,14 @@ public class Customer extends User {
         double totalCost = shoppingCart.calculateTotal();
         if (balance >= totalCost) {
             balance -= totalCost;
+            System.out.println("Checkout successful. Total cost: $" + totalCost);
             shoppingCart.clear();
-            return true; // Checkout successful
+            return true;
         } else {
-            return false; // Insufficient balance to complete the purchase.
+            System.out.println("Checkout failed. Insufficient balance.");
+            return false;
         }
-    }
+    }  
 
     // Method to view balance
     public double getBalance() {
@@ -42,15 +47,44 @@ public class Customer extends User {
 
     // Method to add balance
     public void addBalance(double amount) {
-        this.balance += amount;
-        System.out.println("Your balance has been updated. New balance: $" + balance);
-    }
+        if (amount > 0) {
+            this.balance += amount;
+            System.out.println("Your balance has been updated. New balance: $" + balance);
+        } else {
+            System.out.println("Error: Cannot add a negative amount to balance.");
+        }
+    }    
 
     // Getters and Setters
     public ShoppingCart getShoppingCart() {
         return shoppingCart;
     }
 
-    // Additional methods for customer functionalities can be added
-    // ...
+    public void viewCart() {
+        shoppingCart.displayCartContents();
+    }
+    
+    public void playBalanceGame() {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        int winningNumber = random.nextInt(10) + 1; // Random number between 1 and 10
+        int numberOfTries = 3; // Number of attempts the customer gets
+        double rewardAmount = 100.0; // Reward for guessing correctly
+
+        System.out.println("Guess the number (between 1 and 10) to win $" + rewardAmount + "!");
+        for (int i = 0; i < numberOfTries; i++) {
+            System.out.print("Enter your guess: ");
+            int userGuess = scanner.nextInt();
+
+            if (userGuess == winningNumber) {
+                System.out.println("Congratulations! You've guessed the number!");
+                this.balance += rewardAmount;
+                System.out.println("Your balance has been updated. New balance: $" + this.balance);
+                return;
+            } else {
+                System.out.println("Wrong guess. Try again.");
+            }
+        }
+        System.out.println("Sorry, you've used all your tries. The correct number was " + winningNumber + ".");
+    }
 }
