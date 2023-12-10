@@ -24,7 +24,7 @@ public class BobaShop {
     public void loadData() {
         // Deserialize users
         Object usersData = FileManager.deserialize("users.ser");
-        if (usersData != null) {
+        if (usersData instanceof List<?>) {
             users = (List<User>) usersData;
         }
     
@@ -37,42 +37,44 @@ public class BobaShop {
 
     // Method for user login
     public void login() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter username: ");
-        String username = scanner.nextLine();
-        System.out.print("Enter password: ");
-        String password = scanner.nextLine();
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
+            System.out.print("Enter password: ");
+            String password = scanner.nextLine();
 
-        for (User user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                currentUser = user;
-                user.displayMenu();
-                return;
+            for (User user : users) {
+                if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                    currentUser = user;
+                    user.displayMenu();
+                    return;
+                }
             }
-        }
 
-        System.out.println("Invalid username or password");
+            System.out.println("Invalid username or password");
+        }
     }
 
     // Method for registering a new customer
     public void register() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter new username: ");
-        String username = scanner.nextLine();
-        System.out.print("Enter new password: ");
-        String password = scanner.nextLine();
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Enter new username: ");
+            String username = scanner.nextLine();
+            System.out.print("Enter new password: ");
+            String password = scanner.nextLine();
 
-        // Check for existing username
-        for (User user : users) {
-            if (user.getUsername().equals(username)) {
-                System.out.println("Error: Username already exists");
-                return;
+            // Check for existing username
+            for (User user : users) {
+                if (user.getUsername().equals(username)) {
+                    System.out.println("Error: Username already exists");
+                    return;
+                }
             }
-        }
 
-        // Create new customer account
-        Customer newCustomer = new Customer(username, password);
-        users.add(newCustomer);
-        System.out.println("Customer account created successfully");
+            // Create new customer account
+            Customer newCustomer = new Customer(username, password, inventory);
+            users.add(newCustomer);
+            System.out.println("Customer account created successfully");
+        }
     }
 }

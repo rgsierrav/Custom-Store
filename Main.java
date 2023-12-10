@@ -2,34 +2,35 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        BobaShop bobaShop = new BobaShop(); 
-        bobaShop.loadData();  // Load data at the start
+        try(Scanner scanner = new Scanner(System.in)){
+            BobaShop bobaShop = new BobaShop(); 
+            bobaShop.loadData();  // Load data at the start
 
-        int choice;
+            int choice;
 
-        while (true) {
-            displayWelcomeMessage();
-            choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline left-over
+            while (true) {
+                displayWelcomeMessage();
+                choice = scanner.nextInt();
+                scanner.nextLine(); // Consume the newline left-over
 
-            switch (choice) {
-                case 1:
-                    bobaShop.login();
+                switch (choice) {
+                    case 1:
+                        bobaShop.login();
+                        break;
+                    case 2:
+                        bobaShop.register();
+                        break;
+                    case 3:
+                        System.out.println("Thank you for visiting our Boba Shop! See you next time!");
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                }
+
+                if (choice == 3) {
+                    bobaShop.saveData();  // Save data before exiting
                     break;
-                case 2:
-                    bobaShop.register();
-                    break;
-                case 3:
-                    System.out.println("Thank you for visiting our Boba Shop! See you next time!");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-            }
-
-            if (choice == 3) {
-                bobaShop.saveData();  // Save data before exiting
-                break;
+                }
             }
         }
     }

@@ -79,15 +79,16 @@ public class Admin extends User {
                     return;
                 }
             }
-        
+    
             // Check password length (5 characters as per requirement)
             if (password.length() != 5) {
                 System.out.println("Error: Password should be exactly 5 characters");
                 return;
             }
-        
+    
             // Creating and adding the new customer account
-            users.add(new Customer(username, password));
+            // Now passing the inventory object along with username and password
+            users.add(new Customer(username, password, this.inventory));
             System.out.println("Success: Customer account has been created");
         }
     }    
