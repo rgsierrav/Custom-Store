@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
-            BobaInventory inventory = new BobaInventory(); // Inventory is initialized with default items
             BobaShop bobaShop = new BobaShop(); // Shop is initialized with default customer and inventory
 
             bobaShop.loadData();  // Load data at the start

@@ -7,10 +7,7 @@ public class BobaInventory {
 
     public BobaInventory() {
         this.products = new ArrayList<>();
-        // Add default products
-        this.products.add(new BobaProduct("Brown Sugar Boba", "Small", 10, 5.99));
-        this.products.add(new BobaProduct("Thai Boba", "Medium", 20, 9.99));
-        this.products.add(new BobaProduct("Matcha Boba", "Large", 15, 12.99));
+        // The default products will now be added by BobaShop
     }
 
     // Method to add a product to the inventory

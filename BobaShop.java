@@ -10,6 +10,7 @@ public class BobaShop {
     // Constructor
     public BobaShop() {
         this.inventory = new BobaInventory();
+        initializeDefaultInventory(); // Initialize default inventory items
         this.users = new ArrayList<>();
         // Default admin account for demonstration purposes
         this.users.add(new Admin("admin", "12345", inventory, users));
@@ -17,6 +18,13 @@ public class BobaShop {
         Customer defaultCustomer = new Customer("BobaFan", "BobaFan1", this.inventory);
         this.users.add(defaultCustomer);
     }
+
+    private void initializeDefaultInventory() {
+        // Add default products
+        this.inventory.addProduct(new BobaProduct("Brown Sugar Boba", "Small", 10, 5.99));
+        this.inventory.addProduct(new BobaProduct("Thai Boba", "Medium", 20, 9.99));
+        this.inventory.addProduct(new BobaProduct("Matcha Boba", "Large", 15, 12.99));
+    }    
 
     public void displayCurrentUserDetails() {
         if (currentUser != null) {
