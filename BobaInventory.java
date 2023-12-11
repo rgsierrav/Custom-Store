@@ -54,12 +54,11 @@ public class BobaInventory implements Serializable {
 
     // Method to view all products in the inventory
     public void viewInventory() {
-        if (products.isEmpty()) {
-            System.out.println("Inventory is empty");
-        } else {
-            for (BobaProduct product : products) {
-                System.out.println(product); // Display information about each product
-            }
+        System.out.println("******** View Inventory ********");
+        for (BobaProduct product : products) {
+            System.out.println("\nName: " + product.getName());
+            System.out.println("Count: " + product.getCount()); // Assuming you have a getCount method
+            System.out.printf("Price: $%.2f\n", product.getPrice());
         }
     }
 }
