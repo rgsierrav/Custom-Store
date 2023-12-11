@@ -1,7 +1,6 @@
 import java.io.*;
 
 public class FileManager {
-
     // Serialize an object and save it to a file
     public static void serialize(Object obj, String filename) {
         try (FileOutputStream fileOut = new FileOutputStream(filename);

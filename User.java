@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public abstract class User {
     protected String username;
     protected String password;
@@ -29,5 +31,5 @@ public abstract class User {
     }
 
     // Abstract method to display the user-specific menu
-    public abstract void displayMenu();
+    public abstract void displayMenu(Scanner scanner);
 }

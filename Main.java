@@ -2,13 +2,13 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            BobaShop bobaShop = new BobaShop(); // Shop is initialized with default customer and inventory
+        Scanner scanner = new Scanner(System.in);
+        BobaShop bobaShop = new BobaShop();
 
-            bobaShop.loadData();  // Load data at the start
+        bobaShop.loadData();  // Load data at the start
 
-            int choice;
-
+        int choice;
+        try {
             while (true) {
                 displayWelcomeMessage();
                 choice = scanner.nextInt();
@@ -16,10 +16,10 @@ public class Main {
 
                 switch (choice) {
                     case 1:
-                        bobaShop.login();
+                        bobaShop.login(scanner);
                         break;
                     case 2:
-                        bobaShop.register();
+                        bobaShop.register(scanner);
                         break;
                     case 3:
                         System.out.println("Thank you for visiting our Boba Shop! See you next time!");
@@ -30,9 +30,11 @@ public class Main {
 
                 if (choice == 3) {
                     bobaShop.saveData();  // Save data before exiting
-                    break;
+                    break;  // Break out of the while loop
                 }
             }
+        } finally {
+            scanner.close();  // Close the scanner here
         }
     }
 
