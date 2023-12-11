@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Scanner;
+import java.util.Iterator;
 
 public class Admin extends User {
     private static final long serialVersionUID = 1L;
@@ -90,10 +91,12 @@ public class Admin extends User {
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         // Find and remove the user
+        Iterator<User> iterator = users.iterator();
         boolean found = false;
-        for (User user : users) {
+        while (iterator.hasNext()) {
+            User user = iterator.next();
             if (user.getUsername().equals(username) && user instanceof Customer) {
-                users.remove(user);
+                iterator.remove(); // Safely remove the user
                 found = true;
                 System.out.println("Success: Customer account has been removed");
                 break;
@@ -103,7 +106,7 @@ public class Admin extends User {
         if (!found) {
             System.out.println("Error: This username doesn't exist");
         }
-    }
+    }    
 
     private void addProduct(Scanner scanner) {
         System.out.print("Enter new product name: ");
