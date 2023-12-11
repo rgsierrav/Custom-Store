@@ -14,7 +14,7 @@ public class Admin extends User {
         this.users = users;
     }
 
-    // Admin menu
+    // Display the admin menu and handle admin-specific actions
     @Override
     public void displayMenu(Scanner scanner) {
         int choice;
@@ -61,12 +61,13 @@ public class Admin extends User {
         } while (choice != 7);
     }
 
-    // Admin-specific methods
+    // Create a new customer account
     private void createCustomerAccount(Scanner scanner) {
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
+
         // Check if username already exists
         for (User user : users) {
             if (user.getUsername().equals(username)) {
@@ -82,14 +83,15 @@ public class Admin extends User {
         }
 
         // Creating and adding the new customer account
-        // Now passing the inventory object along with username and password
         users.add(new Customer(username, password, this.inventory));
         System.out.println("Success: Customer account has been created");
-    }   
+    }
 
+    // Remove a customer account
     private void removeCustomerAccount(Scanner scanner) {
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
+
         // Find and remove the user
         Iterator<User> iterator = users.iterator();
         boolean found = false;
@@ -102,12 +104,13 @@ public class Admin extends User {
                 break;
             }
         }
-    
+
         if (!found) {
             System.out.println("Error: This username doesn't exist");
         }
-    }    
+    }
 
+    // Add a new product to the inventory
     private void addProduct(Scanner scanner) {
         System.out.print("Enter new product name: ");
         String name = scanner.nextLine();
@@ -120,17 +123,19 @@ public class Admin extends User {
 
         BobaProduct newProduct = new BobaProduct(name, size, count, price);
         inventory.addProduct(newProduct);
-    }   
+    }
 
+    // Remove a product from the inventory
     private void removeProduct(Scanner scanner) {
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
         System.out.print("Enter size: ");
         String size = scanner.nextLine();
-    
-        inventory.removeProduct(name, size);
-    }      
 
+        inventory.removeProduct(name, size);
+    }
+
+    // Restock an existing product in the inventory
     private void restockProduct(Scanner scanner) {
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
@@ -138,14 +143,14 @@ public class Admin extends User {
         String size = scanner.nextLine();
         System.out.print("Enter additional count: ");
 
-        // Ensuring the input is a valid integer
+        // Ensure the input is a valid integer
         while (!scanner.hasNextInt()) {
             System.out.println("Please enter a valid number for additional count.");
             scanner.next(); // Clear the invalid input
             System.out.print("Enter additional count: ");
         }
         int additionalCount = scanner.nextInt();
-    
+
         inventory.restockProduct(name, size, additionalCount);
     }
-}       
+}

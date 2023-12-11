@@ -6,32 +6,32 @@ public abstract class User implements Serializable {
     protected String username;
     protected String password;
 
-    // Constructor
+    // Constructor initializes the username and password
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    // Getter for Username
+    // Getter method to retrieve the username
     public String getUsername() {
         return username;
     }
 
-    // Setter for Username
+    // Setter method to update the username
     public void setUsername(String username) {
         this.username = username;
     }
 
-    // Getter for Password
+    // Getter method to retrieve the password
     public String getPassword() {
         return password;
     }
 
-    // Setter for Password
+    // Setter method to update the password
     public void setPassword(String password) {
         this.password = password;
     }
 
-    // Abstract method to display the user-specific menu
+    // Abstract method to be implemented by subclasses for displaying user-specific menus
     public abstract void displayMenu(Scanner scanner);
 }

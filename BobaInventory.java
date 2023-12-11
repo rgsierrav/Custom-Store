@@ -9,7 +9,7 @@ public class BobaInventory implements Serializable {
 
     public BobaInventory() {
         this.products = new ArrayList<>();
-        // The default products will now be added by BobaShop
+        // The default products will now be added by BobaShop during initialization
     }
 
     // Method to add a product to the inventory
@@ -28,6 +28,7 @@ public class BobaInventory implements Serializable {
 
     // Method to remove a product from the inventory
     public void removeProduct(String name, String size) {
+        // Use Java Streams to filter out the product to be removed
         products = products.stream()
                 .filter(p -> !(p.getName().equals(name) && p.getSize().equals(size)))
                 .collect(Collectors.toList());
@@ -46,8 +47,9 @@ public class BobaInventory implements Serializable {
         System.out.println("Error: Product not found in inventory");
     }
 
+    // Getter to access the list of products
     public List<BobaProduct> getProducts() {
-    return products;
+        return products;
     }
 
     // Method to view all products in the inventory
@@ -56,7 +58,7 @@ public class BobaInventory implements Serializable {
             System.out.println("Inventory is empty");
         } else {
             for (BobaProduct product : products) {
-                System.out.println(product);
+                System.out.println(product); // Display information about each product
             }
         }
     }

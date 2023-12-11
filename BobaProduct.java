@@ -2,18 +2,18 @@ import java.io.Serializable;
 
 public class BobaProduct implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String name;
-    private String size; // Sizes like Small, Medium, Large
-    private double price;
-    private int count;  // New field to track the product count
+    private String name; // The name of the Boba product
+    private String size; // The size of the Boba product  (Small, Medium, Large)
+    private double price; // The price of the Boba product
+    private int count; // The count of available units of the Boba product
 
-    // Constructor
+    // Constructor to initialize a BobaProduct object
     public BobaProduct(String name, String size, int count, double price) {
         this.name = name;
         this.size = size;
-        this.count = count;
-        this.price = price;
-    }    
+        this.count = count; // Initialize the count of available units
+        this.price = price; // Initialize the price of the Boba product
+    }
 
     // Getter and Setter for Count
     public int getCount() {
@@ -21,7 +21,7 @@ public class BobaProduct implements Serializable {
     }
 
     public void setCount(int count) {
-        this.count = count;
+        this.count = count; // Set the count of available units
     }
 
     // Getter and Setter for Name
@@ -30,7 +30,7 @@ public class BobaProduct implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name; // Set the name of the Boba product
     }
 
     // Getter and Setter for Size
@@ -39,7 +39,7 @@ public class BobaProduct implements Serializable {
     }
 
     public void setSize(String size) {
-        this.size = size;
+        this.size = size; // Set the size of the Boba product
     }
 
     // Getter and Setter for Price
@@ -48,10 +48,10 @@ public class BobaProduct implements Serializable {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        this.price = price; // Set the price of the Boba product
     }
 
-    // toString method for easy display
+    // toString method for easy display of BobaProduct information
     @Override
     public String toString() {
         return "BobaProduct{" +
