@@ -6,12 +6,14 @@ public class Admin extends User {
     private static final long serialVersionUID = 1L;
     private transient BobaInventory inventory; // Marked as transient if BobaInventory is not serializable
     private List<User> users; // Ensure User class is serializable
+    private BobaShop bobaShop; // Add a reference to BobaShop
 
     // Constructor
-    public Admin(String username, String password, BobaInventory inventory, List<User> users) {
+    public Admin(String username, String password, BobaInventory inventory, List<User> users, BobaShop bobaShop) {
         super(username, password);
         this.inventory = inventory;
         this.users = users;
+        this.bobaShop = bobaShop; // Correctly initialize the reference
     }
 
     // Display the admin menu and handle admin-specific actions
@@ -87,11 +89,16 @@ public class Admin extends User {
         System.out.println("Success: Customer account has been created");
     }
 
-    // Remove a customer account
     private void removeCustomerAccount(Scanner scanner) {
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
-
+    
+        // Debug: Print all usernames
+        System.out.println("Checking usernames:");
+        for (User user : users) {
+            System.out.println("Username: " + user.getUsername());
+        }
+    
         // Find and remove the user
         Iterator<User> iterator = users.iterator();
         boolean found = false;
@@ -101,14 +108,15 @@ public class Admin extends User {
                 iterator.remove(); // Safely remove the user
                 found = true;
                 System.out.println("Success: Customer account has been removed");
+                bobaShop.saveData(); // Save data after removing the user
                 break;
             }
         }
-
+    
         if (!found) {
             System.out.println("Error: This username doesn't exist");
         }
-    }
+    }    
 
     // Add a new product to the inventory
     private void addProduct(Scanner scanner) {

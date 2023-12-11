@@ -17,10 +17,11 @@ public class BobaShop {
         File usersFile = new File("users.ser");
         if (!usersFile.exists()) {
             // Initialize default users only if users.ser does not exist
-            users.add(new Admin("admin", "12345", inventory, users));
+            users.add(new Admin("admin", "12345", inventory, users, this)); // Pass 'this' to Admin
             users.add(new Customer("BobaFan", "BobaFan1", this.inventory));
         }
-    }
+        loadData(); // Load data after initialization
+    }    
 
     // Initialize default inventory items
     private void initializeDefaultInventory() {
