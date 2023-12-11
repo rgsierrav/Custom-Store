@@ -8,6 +8,7 @@ public class FileManager {
             out.writeObject(obj);
         } catch (IOException e) {
             System.out.println("An error occurred during serialization: " + e.getMessage());
+            e.printStackTrace(); // Add this line to print the stack trace
         }
     }
 

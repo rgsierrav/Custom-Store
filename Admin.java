@@ -6,7 +6,7 @@ public class Admin extends User {
     private static final long serialVersionUID = 1L;
     private transient BobaInventory inventory; // Marked as transient if BobaInventory is not serializable
     private List<User> users; // Ensure User class is serializable
-    private BobaShop bobaShop; // Add a reference to BobaShop
+    private transient BobaShop bobaShop; // Mark as transient
 
     // Constructor
     public Admin(String username, String password, BobaInventory inventory, List<User> users, BobaShop bobaShop) {

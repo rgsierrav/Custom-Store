@@ -34,4 +34,4 @@ run: all
 
 clean:
 	del *.class
-      
+	del *.ser

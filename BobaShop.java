@@ -17,11 +17,11 @@ public class BobaShop {
         File usersFile = new File("users.ser");
         if (!usersFile.exists()) {
             // Initialize default users only if users.ser does not exist
-            users.add(new Admin("admin", "12345", inventory, users, this)); // Pass 'this' to Admin
+            users.add(new Admin("admin", "12345", inventory, users, this));
             users.add(new Customer("BobaFan", "BobaFan1", this.inventory));
         }
         loadData(); // Load data after initialization
-    }    
+    }     
 
     // Initialize default inventory items
     private void initializeDefaultInventory() {
@@ -64,15 +64,14 @@ public class BobaShop {
                 }
             }
         }
-
+    
         if (inventoryFile.exists()) {
-            // Deserialize inventory from the file
             Object inventoryData = FileManager.deserialize("inventory.ser");
             if (inventoryData instanceof BobaInventory) {
-                inventory = (BobaInventory) inventoryData; // Replace the inventory with the deserialized one
+                inventory = (BobaInventory) inventoryData;
             }
         }
-    }
+    }    
 
     // Method for user login
     public void login(Scanner scanner) {
