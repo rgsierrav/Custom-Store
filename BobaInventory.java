@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.io.Serializable;
 
 public class BobaInventory implements Serializable {
@@ -9,43 +8,37 @@ public class BobaInventory implements Serializable {
 
     public BobaInventory() {
         this.products = new ArrayList<>();
-        // The default products will now be added by BobaShop during initialization
     }
 
     // Method to add a product to the inventory
     public void addProduct(BobaProduct product) {
-        // Check if the product already exists in the inventory
         for (BobaProduct existingProduct : products) {
-            if (existingProduct.getName().equals(product.getName()) && existingProduct.getSize().equals(product.getSize())) {
+            if (existingProduct.getName().equals(product.getName())) {
                 System.out.println("Error: Product already exists in inventory");
                 return;
             }
         }
-
         products.add(product);
         System.out.println("Success: Product has been added to inventory");
-    }
+    }    
 
     // Method to remove a product from the inventory
-    public void removeProduct(String name, String size) {
-        // Use Java Streams to filter out the product to be removed
-        products = products.stream()
-                .filter(p -> !(p.getName().equals(name) && p.getSize().equals(size)))
-                .collect(Collectors.toList());
-        System.out.println("Success: Product has been removed from inventory");
-    }
+    public boolean removeProduct(String name) {
+        int initialSize = products.size();
+        products.removeIf(p -> p.getName().equals(name));
+        return products.size() < initialSize;
+    }    
 
     // Method to restock a specific product
-    public void restockProduct(String name, String size, int additionalCount) {
+    public boolean restockProduct(String name, int additionalCount) {
         for (BobaProduct product : products) {
-            if (product.getName().equals(name) && product.getSize().equals(size)) {
+            if (product.getName().equals(name)) {
                 product.setCount(product.getCount() + additionalCount);
-                System.out.println("Success: Product has been restocked");
-                return;
+                return true;
             }
         }
-        System.out.println("Error: Product not found in inventory");
-    }
+        return false;
+    }    
 
     // Getter to access the list of products
     public List<BobaProduct> getProducts() {
@@ -57,7 +50,7 @@ public class BobaInventory implements Serializable {
         System.out.println("******** View Inventory ********");
         for (BobaProduct product : products) {
             System.out.println("\nName: " + product.getName());
-            System.out.println("Count: " + product.getCount()); // Assuming you have a getCount method
+            System.out.println("Count: " + product.getCount());
             System.out.printf("Price: $%.2f\n", product.getPrice());
         }
     }

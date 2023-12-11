@@ -26,11 +26,11 @@ public class BobaShop {
     // Initialize default inventory items
     private void initializeDefaultInventory() {
         // Add default products to the inventory
-        this.inventory.addProduct(new BobaProduct("Brown Sugar Boba", "Small", 10, 5.99));
-        this.inventory.addProduct(new BobaProduct("Thai Boba", "Medium", 20, 9.99));
-        this.inventory.addProduct(new BobaProduct("Matcha Boba", "Large", 15, 12.99));
+        this.inventory.addProduct(new BobaProduct("Brown Sugar Boba", 10, 5.99));
+        this.inventory.addProduct(new BobaProduct("Thai Boba", 20, 9.99));
+        this.inventory.addProduct(new BobaProduct("Matcha Boba", 15, 12.99));
     }
-
+        
     // Display the details of the current user
     public void displayCurrentUserDetails() {
         if (currentUser != null) {

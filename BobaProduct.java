@@ -3,14 +3,12 @@ import java.io.Serializable;
 public class BobaProduct implements Serializable {
     private static final long serialVersionUID = 1L;
     private String name; // The name of the Boba product
-    private String size; // The size of the Boba product  (Small, Medium, Large)
     private double price; // The price of the Boba product
     private int count; // The count of available units of the Boba product
 
     // Constructor to initialize a BobaProduct object
-    public BobaProduct(String name, String size, int count, double price) {
+    public BobaProduct(String name, int count, double price) {
         this.name = name;
-        this.size = size;
         this.count = count; // Initialize the count of available units
         this.price = price; // Initialize the price of the Boba product
     }
@@ -33,15 +31,6 @@ public class BobaProduct implements Serializable {
         this.name = name; // Set the name of the Boba product
     }
 
-    // Getter and Setter for Size
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size; // Set the size of the Boba product
-    }
-
     // Getter and Setter for Price
     public double getPrice() {
         return price;
@@ -56,8 +45,8 @@ public class BobaProduct implements Serializable {
     public String toString() {
         return "BobaProduct{" +
                 "name='" + name + '\'' +
-                ", size='" + size + '\'' +
                 ", price=" + price +
+                ", count=" + count +
                 '}';
     }
 }

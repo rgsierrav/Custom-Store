@@ -53,20 +53,27 @@ public class Customer extends User {
     }
 
     private void shopStore(Scanner scanner) {
-        inventory.viewInventory(); // Display the inventory of the store
-
-        System.out.print("Enter the product name you want to add to your cart: ");
+        // Display the inventory in the desired format
+        System.out.println("******** Shop the Store ********");
+        for (BobaProduct product : inventory.getProducts()) {
+            System.out.println("\nName: " + product.getName());
+            System.out.println("Count: " + product.getCount()); // Assuming you have a getCount method
+            System.out.printf("Price: $%.2f\n", product.getPrice());
+        }
+    
+        // Get user input for product selection
+        System.out.print("\nEnter the product name you want to add to your cart: ");
         String productName = scanner.nextLine();
-        System.out.print("Enter size: ");
-        String size = scanner.nextLine();
+    
+        // Get user input for quantity
         System.out.print("Enter quantity: ");
         int quantity = scanner.nextInt();
         scanner.nextLine(); // Consume the newline left-over
-
-        // Find the product in inventory and add it to the shopping cart
+    
+        // Find the product and add it to the cart
         boolean found = false;
         for (BobaProduct product : inventory.getProducts()) {
-            if (product.getName().equals(productName) && product.getSize().equals(size)) {
+            if (product.getName().equalsIgnoreCase(productName)) {
                 for (int i = 0; i < quantity; i++) {
                     shoppingCart.add(product);
                 }
@@ -75,11 +82,11 @@ public class Customer extends User {
                 break;
             }
         }
-
+    
         if (!found) {
             System.out.println("Error: Product not found in inventory");
         }
-    }
+    }    
 
     private void viewAndCheckoutCart(Scanner scanner) {
         double total = 0;

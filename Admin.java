@@ -122,35 +122,35 @@ public class Admin extends User {
     private void addProduct(Scanner scanner) {
         System.out.print("Enter new product name: ");
         String name = scanner.nextLine();
-        System.out.print("Enter size: ");
-        String size = scanner.nextLine();
         System.out.print("Enter price: ");
         double price = scanner.nextDouble();
         System.out.print("Enter count: ");
         int count = scanner.nextInt();
-
-        BobaProduct newProduct = new BobaProduct(name, size, count, price);
+    
+        BobaProduct newProduct = new BobaProduct(name, count, price);
         inventory.addProduct(newProduct);
-    }
+        System.out.println("Success: Product has been added to inventory");
+    }    
 
     // Remove a product from the inventory
     private void removeProduct(Scanner scanner) {
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
-        System.out.print("Enter size: ");
-        String size = scanner.nextLine();
-
-        inventory.removeProduct(name, size);
-    }
+    
+        boolean isRemoved = inventory.removeProduct(name);
+        if (isRemoved) {
+            System.out.println("Success: Product has been removed from inventory");
+        } else {
+            System.out.println("Error: Product not found in inventory");
+        }
+    }    
 
     // Restock an existing product in the inventory
     private void restockProduct(Scanner scanner) {
         System.out.print("Enter product name: ");
         String name = scanner.nextLine();
-        System.out.print("Enter size: ");
-        String size = scanner.nextLine();
         System.out.print("Enter additional count: ");
-
+    
         // Ensure the input is a valid integer
         while (!scanner.hasNextInt()) {
             System.out.println("Please enter a valid number for additional count.");
@@ -158,9 +158,14 @@ public class Admin extends User {
             System.out.print("Enter additional count: ");
         }
         int additionalCount = scanner.nextInt();
-
-        inventory.restockProduct(name, size, additionalCount);
-    }
+    
+        boolean isRestocked = inventory.restockProduct(name, additionalCount);
+        if (isRestocked) {
+            System.out.println("Success: Product has been restocked");
+        } else {
+            System.out.println("Error: Product not found in inventory");
+        }
+    }    
 
     //Method to set inventory
     public void setInventory(BobaInventory inventory) {
