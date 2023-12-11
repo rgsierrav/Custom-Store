@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.io.Serializable;
 
-public class BobaInventory {
+public class BobaInventory implements Serializable {
+    private static final long serialVersionUID = 1L;
     private List<BobaProduct> products;
 
     public BobaInventory() {
