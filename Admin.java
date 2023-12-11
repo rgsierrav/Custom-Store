@@ -2,8 +2,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Admin extends User {
-    private BobaInventory inventory;
-    private List<User> users;
+    private static final long serialVersionUID = 1L;
+    private transient BobaInventory inventory; // Marked as transient if BobaInventory is not serializable
+    private List<User> users; // Ensure User class is serializable
 
     // Constructor
     public Admin(String username, String password, BobaInventory inventory, List<User> users) {
