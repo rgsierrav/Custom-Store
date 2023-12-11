@@ -13,11 +13,13 @@ public class BobaShop {
         this.inventory = new BobaInventory(); // Initialize the inventory
         initializeDefaultInventory(); // Initialize default inventory items
         this.users = new ArrayList<>(); // Initialize the list of users
-        // Create a default admin account for demonstration purposes
-        this.users.add(new Admin("admin", "12345", inventory, users));
-        // Add a default customer
-        Customer defaultCustomer = new Customer("BobaFan", "BobaFan1", this.inventory);
-        this.users.add(defaultCustomer);
+    
+        File usersFile = new File("users.ser");
+        if (!usersFile.exists()) {
+            // Initialize default users only if users.ser does not exist
+            users.add(new Admin("admin", "12345", inventory, users));
+            users.add(new Customer("BobaFan", "BobaFan1", this.inventory));
+        }
     }
 
     // Initialize default inventory items
@@ -48,15 +50,15 @@ public class BobaShop {
     public void loadData() {
         File usersFile = new File("users.ser");
         File inventoryFile = new File("inventory.ser");
-
+    
         if (usersFile.exists()) {
-            // Deserialize users from the file
             Object usersData = FileManager.deserialize("users.ser");
             if (usersData instanceof List<?>) {
+                users.clear(); // Clear existing users before adding deserialized ones
                 List<?> rawList = (List<?>) usersData;
                 for (Object o : rawList) {
                     if (o instanceof User) {
-                        users.add((User) o); // Add deserialized users to the list
+                        users.add((User) o);
                     }
                 }
             }
