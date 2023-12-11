@@ -161,4 +161,9 @@ public class Admin extends User {
 
         inventory.restockProduct(name, size, additionalCount);
     }
+
+    //Method to set inventory
+    public void setInventory(BobaInventory inventory) {
+        this.inventory = inventory;
+    }    
 }

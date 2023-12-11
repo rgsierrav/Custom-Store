@@ -60,6 +60,10 @@ public class BobaShop {
                 for (Object o : rawList) {
                     if (o instanceof User) {
                         users.add((User) o);
+                        if (o instanceof Admin) {
+                            // Reinitialize inventory for each Admin user
+                            ((Admin) o).setInventory(this.inventory);
+                        }
                     }
                 }
             }
@@ -71,7 +75,7 @@ public class BobaShop {
                 inventory = (BobaInventory) inventoryData;
             }
         }
-    }    
+    }      
 
     // Method for user login
     public void login(Scanner scanner) {
